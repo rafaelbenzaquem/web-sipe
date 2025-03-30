@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>Dia</th>
-        <th colspan="8">Registros</th>
+        <th colspan="9">Registros</th>
         <th>Descrição</th>
     </tr>
     </thead>
@@ -14,6 +14,12 @@
             <div style="display: flex; flex-direction: column; text-align: center;">
                 <span th:text="${registro.sentido}"></span>
                 <span th:text="${registro.hora}"></span>
+            </div>
+        </td>
+        <td>
+            <div style="display: flex; flex-direction: column; text-align: center;">
+                <span >Total</span>
+                <span th:text="${ponto.tempoTotal}"></span>
             </div>
         </td>
 

@@ -11,31 +11,52 @@
     </style>
 </head>
 <body>
-
-<h2>Consulta de Pontos</h2>
-
-<form hx-get="/pontos/tabela"
-      hx-target="#tabela-pontos"
-      hx-trigger="submit"
->
-    <label>
-        Matrícula:
-        <input type="text" name="matricula" required>
-    </label>
-    <label>
-        Início:
-        <input type="date" name="inicio" required>
-    </label>
-    <label>
-        Fim:
-        <input type="date" name="fim" required>
-    </label>
-    <button type="submit">Buscar</button>
-</form>
-
-<div id="tabela-pontos">
-    <!-- A tabela HTML será inserida aqui -->
-</div>
-
+    <h2>Consulta de Pontos</h2>
+    <form hx-get="/pontos/tabela"
+          hx-target="#tabela-pontos"
+          hx-indicator=".htmx-indicator"
+          hx-trigger="submit">
+        <label>
+            Matrícula:
+            <input type="text" name="matricula" required>
+        </label>
+        <label>
+            Início:
+            <input type="date" name="inicio" required>
+        </label>
+        <label>
+            Fim:
+            <input type="date" name="fim" required>
+        </label>
+        <button type="submit">Buscar</button>
+        <button type="button" onclick="abrirRelatorio()">Donwload Relatório</button>
+    </form>
+    <div id="tabela-pontos">
+        <div class="htmx-indicator">Carregando...</div>
+    </div>
 </body>
+<script>
+    function formatarDataPara_ddMMyyyy(data) {
+        const partes = data.split('-'); // [yyyy, MM, dd]
+        if (partes.length !== 3) return '';
+        return partes[2] + partes[1] + partes[0]; // dd + MM + yyyy
+    }
+
+    function abrirRelatorio() {
+        const form = document.querySelector('form');
+        const matricula = form.querySelector('input[name="matricula"]').value;
+        const inicioBruto = form.querySelector('input[name="inicio"]').value;
+        const fimBruto = form.querySelector('input[name="fim"]').value;
+
+        const inicio = formatarDataPara_ddMMyyyy(inicioBruto);
+        const fim = formatarDataPara_ddMMyyyy(fimBruto);
+
+        if (!matricula || !inicio || !fim) {
+            alert("Preencha todos os campos antes de abrir o relatório.");
+            return;
+        }
+        const url = `http://localhost:8084/v1/sap/relatorios/${matricula}?inicio=${inicio}&fim=${fim}`;
+        window.open(url, '_blank');
+    }
+</script>
 </html>

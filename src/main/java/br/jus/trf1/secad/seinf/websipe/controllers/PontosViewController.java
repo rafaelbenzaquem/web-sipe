@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class PontosViewController {
             return Map.of(
                     "dia", ponto.dia(),
                     "descricao", ponto.descricao(),
+                    "tempoTotal", formataTempoTotal(Duration.ofSeconds(ponto.indice() * ponto.totalSegundos())),
                     "registros", registroModelListCompleto
             );
         }).toList();
@@ -54,7 +56,7 @@ public class PontosViewController {
         return "fragmentos/tabela-pontos"; // HTML renderizado
     }
 
-    public static List<RegistroModel> completarLista(List<RegistroModel> lista) {
+    private static List<RegistroModel> completarLista(List<RegistroModel> lista) {
         // Verifica se a lista é nula para evitar NullPointerException
         if (lista == null) {
             throw new IllegalArgumentException("A lista não pode ser nula");
@@ -68,6 +70,16 @@ public class PontosViewController {
             lista.add(RegistroModel.NULL_OBJECT);
         }
         return lista;
+    }
+
+    private static String formataTempoTotal(Duration permanencia) {
+        var horas = permanencia.toHours();
+        var minutos = permanencia.toMinutes();
+        var segundos = permanencia.toSeconds();
+
+        return "%02d:%02d:%02d".formatted(horas,
+                horas == 0 ? minutos : minutos % (horas * 60),
+                minutos == 0 ? segundos : segundos % (minutos * 60));
     }
 }
 
