@@ -1,0 +1,25 @@
+<table>
+    <thead>
+    <tr>
+        <th>Dia</th>
+        <th colspan="8">Registros</th>
+        <th>Descrição</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ponto : ${pontos}">
+        <td th:text="${#temporals.format(ponto['dia'], 'dd/MM/yyyy')}"></td>
+
+        <td th:each="registro : ${ponto['registros']}">
+            <div style="display: flex; flex-direction: column; text-align: center;">
+                <span th:text="${registro.sentido}"></span>
+                <span th:text="${registro.hora}"></span>
+            </div>
+        </td>
+
+        <td th:text="${ponto['descricao']}"></td>
+
+    </tr>
+
+    </tbody>
+</table>

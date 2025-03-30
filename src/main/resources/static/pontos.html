@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pontos por Período</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+
+<h2>Consulta de Pontos</h2>
+
+<form hx-get="/pontos/tabela"
+      hx-target="#tabela-pontos"
+      hx-trigger="submit"
+>
+    <label>
+        Matrícula:
+        <input type="text" name="matricula" required>
+    </label>
+    <label>
+        Início:
+        <input type="date" name="inicio" required>
+    </label>
+    <label>
+        Fim:
+        <input type="date" name="fim" required>
+    </label>
+    <button type="submit">Buscar</button>
+</form>
+
+<div id="tabela-pontos">
+    <!-- A tabela HTML será inserida aqui -->
+</div>
+
+</body>
+</html>
