@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pontos</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        /* Limita a largura do conteúdo a 80% da tela */
+        .content-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="content-container">
+        <form hx-get="/pontos/tabela"
+              hx-target="#tabela-pontos"
+              hx-indicator=".htmx-indicator"
+              hx-trigger="submit">
+            <label>
+                Matrícula:
+                <input type="text" name="matricula" required>
+            </label>
+            <label>
+                Início:
+                <input type="date" name="inicio" required>
+            </label>
+            <label>
+                Fim:
+                <input type="date" name="fim" required>
+            </label>
+            <button type="submit">Buscar</button>
+        </form>
+        <div id="tabela-pontos">
+            <div class="htmx-indicator">Carregando...</div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

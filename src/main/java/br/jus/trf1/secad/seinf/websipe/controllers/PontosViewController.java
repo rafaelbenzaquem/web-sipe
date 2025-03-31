@@ -56,6 +56,11 @@ public class PontosViewController {
         return "fragmentos/tabela-pontos"; // HTML renderizado
     }
 
+    @GetMapping
+    public String listaPontos() {
+        return "pontos/lista";
+    }
+
     private static List<RegistroModel> completarLista(List<RegistroModel> lista) {
         // Verifica se a lista é nula para evitar NullPointerException
         if (lista == null) {
