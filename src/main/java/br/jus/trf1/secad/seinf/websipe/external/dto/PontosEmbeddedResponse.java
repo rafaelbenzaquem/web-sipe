@@ -14,7 +14,7 @@ public class PontosEmbeddedResponse {
     }
 
     public static class Embedded {
-        @JsonProperty("pontoResponseList")
+        @JsonProperty("pontos")
         private List<PontoResponse> pontos;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
@@ -21,5 +22,11 @@ public interface PontoClient {
     PontosEmbeddedResponse buscaPontos(@RequestParam String matricula,
                                         @RequestParam String inicio,
                                         @RequestParam String fim);
+
+
+    @PostMapping("/v1/sap/pontos/usuarios")
+    PontosEmbeddedResponse atualizaPontos(@RequestParam String matricula,
+                                          @RequestParam String inicio,
+                                          @RequestParam String fim);
 
 }

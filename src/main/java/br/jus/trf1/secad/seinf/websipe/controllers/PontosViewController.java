@@ -38,7 +38,10 @@ public class PontosViewController {
                                    LocalDate fim,
                                    Model model) {
 
-        var pontos = pontoService.buscaPontos(matricula, inicio, fim);
+        var pontos = pontoService.atualizaPontos(matricula, inicio, fim);
+//        if (pontos.isEmpty()) {
+//            pontos = pontoService.atualizaPontos(matricula, inicio, fim);
+//        }
 
         var pontosComRegistros = pontos.stream().map(ponto -> {
             var registroModelList = registroService.listaRegistrosPonto(ponto.matricula(), ponto.dia())
@@ -68,7 +71,7 @@ public class PontosViewController {
         }
 
         // Calcula quantos elementos faltam para completar 8
-        int elementosFaltantes = 8 - lista.size();
+        int elementosFaltantes = 10 - lista.size();
 
         // Adiciona RegistroModel.NULL_OBJECT até completar 8 elementos
         for (int i = 0; i < elementosFaltantes; i++) {

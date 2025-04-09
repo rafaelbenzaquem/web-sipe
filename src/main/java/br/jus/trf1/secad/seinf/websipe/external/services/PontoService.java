@@ -26,4 +26,10 @@ public class PontoService {
         String fimStr = fim.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
         return pontoClient.buscaPontos(matricula, inicioStr, fimStr).getPontos();
     }
+
+    public List<PontoResponse> atualizaPontos(String matricula, LocalDate inicio, LocalDate fim) {
+        String inicioStr = inicio.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+        String fimStr = fim.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+        return pontoClient.atualizaPontos(matricula, inicioStr, fimStr).getPontos();
+    }
 }
